@@ -1,0 +1,241 @@
+model,id,difficulty,correct,reason,sql
+GPT-5.6 Terra,1,hard,False,gen_error,
+GPT-5.6 Terra,2,hard,False,gen_error,
+GPT-5.6 Terra,3,hard,False,gen_error,
+GPT-5.6 Terra,4,hard,False,gen_error,
+GPT-5.6 Terra,5,hard,False,gen_error,
+GPT-5.6 Terra,6,hard,False,gen_error,
+GPT-5.6 Terra,7,hard,False,gen_error,
+GPT-5.6 Terra,8,hard,False,gen_error,
+GPT-5.6 Terra,9,brutal,False,gen_error,
+GPT-5.6 Terra,10,brutal,False,gen_error,
+GPT-5.6 Terra,11,brutal,False,gen_error,
+GPT-5.6 Terra,12,brutal,False,gen_error,
+GPT-5.6 Terra,13,brutal,False,gen_error,
+GPT-5.6 Terra,14,brutal,False,gen_error,
+GPT-5.6 Terra,15,brutal,False,gen_error,
+GPT-5.6 Terra,16,brutal,False,gen_error,
+GPT-5.6 Terra,17,brutal,False,gen_error,
+GPT-5.6 Terra,18,brutal,False,gen_error,
+GPT-5.6 Terra,19,brutal,False,gen_error,
+GPT-5.6 Terra,20,brutal,False,gen_error,
+Kimi K3,1,hard,True,match,SELECT SUM(total_runs) * 1.0 / COUNT(DISTINCT match_ids) FROM deliveries
+Kimi K3,2,hard,False,mismatch,"SELECT batter,
+       ROUND(SUM(CASE WHEN batsman_runs IN (4, 6) THEN batsman_runs ELSE 0 END) * 100.0 / SUM(batsman_runs), 2) AS boundary_percentage
+FROM deliveries
+GROUP BY batter
+HAVING SUM(batsman_runs) >= 500
+ORDER BY SUM(CASE WHEN batsman_runs IN (4, 6) THEN batsman_runs ELSE 0 END) * 100.0 / SUM(batsman_runs) DESC
+LIMIT 1"
+Kimi K3,3,hard,True,match,"SELECT COUNT(*) AS players_with_1000_runs
+FROM (
+    SELECT batter, SUM(batsman_runs) AS total_runs
+    FROM deliveries
+    GROUP BY batter
+    HAVING SUM(batsman_runs) >= 1000
+)"
+Kimi K3,4,hard,False,gen_error,
+Kimi K3,5,hard,False,gen_error,
+Kimi K3,6,hard,False,gen_error,
+Kimi K3,7,hard,False,gen_error,
+Kimi K3,8,hard,False,gen_error,
+Kimi K3,9,brutal,False,gen_error,
+Kimi K3,10,brutal,False,gen_error,
+Kimi K3,11,brutal,False,gen_error,
+Kimi K3,12,brutal,False,gen_error,
+Kimi K3,13,brutal,False,gen_error,
+Kimi K3,14,brutal,False,gen_error,
+Kimi K3,15,brutal,False,gen_error,
+Kimi K3,16,brutal,False,gen_error,
+Kimi K3,17,brutal,False,gen_error,
+Kimi K3,18,brutal,False,gen_error,
+Kimi K3,19,brutal,False,gen_error,
+Kimi K3,20,brutal,False,gen_error,
+Grok 4.5,1,hard,False,gen_error,
+Grok 4.5,2,hard,False,gen_error,
+Grok 4.5,3,hard,False,gen_error,
+Grok 4.5,4,hard,False,gen_error,
+Grok 4.5,5,hard,False,gen_error,
+Grok 4.5,6,hard,False,gen_error,
+Grok 4.5,7,hard,False,gen_error,
+Grok 4.5,8,hard,False,gen_error,
+Grok 4.5,9,brutal,False,gen_error,
+Grok 4.5,10,brutal,False,gen_error,
+Grok 4.5,11,brutal,False,gen_error,
+Grok 4.5,12,brutal,False,gen_error,
+Grok 4.5,13,brutal,False,gen_error,
+Grok 4.5,14,brutal,False,gen_error,
+Grok 4.5,15,brutal,False,gen_error,
+Grok 4.5,16,brutal,False,gen_error,
+Grok 4.5,17,brutal,False,gen_error,
+Grok 4.5,18,brutal,False,gen_error,
+Grok 4.5,19,brutal,False,gen_error,
+Grok 4.5,20,brutal,False,gen_error,
+Claude Sonnet 5,1,hard,False,gen_error,
+Claude Sonnet 5,2,hard,False,gen_error,
+Claude Sonnet 5,3,hard,False,gen_error,
+Claude Sonnet 5,4,hard,False,gen_error,
+Claude Sonnet 5,5,hard,False,gen_error,
+Claude Sonnet 5,6,hard,False,gen_error,
+Claude Sonnet 5,7,hard,False,gen_error,
+Claude Sonnet 5,8,hard,False,gen_error,
+Claude Sonnet 5,9,brutal,False,gen_error,
+Claude Sonnet 5,10,brutal,False,gen_error,
+Claude Sonnet 5,11,brutal,False,gen_error,
+Claude Sonnet 5,12,brutal,False,gen_error,
+Claude Sonnet 5,13,brutal,False,gen_error,
+Claude Sonnet 5,14,brutal,False,gen_error,
+Claude Sonnet 5,15,brutal,False,gen_error,
+Claude Sonnet 5,16,brutal,False,gen_error,
+Claude Sonnet 5,17,brutal,False,gen_error,
+Claude Sonnet 5,18,brutal,False,gen_error,
+Claude Sonnet 5,19,brutal,False,gen_error,
+Claude Sonnet 5,20,brutal,False,gen_error,
+MiniMax M3,1,hard,True,match,SELECT CAST(SUM(total_runs) AS REAL) / COUNT(DISTINCT match_ids) FROM deliveries
+MiniMax M3,2,hard,True,match,"SELECT 
+    batter,
+    (SUM(CASE WHEN batsman_runs IN (4, 6) THEN batsman_runs ELSE 0 END) * 100.0 / SUM(batsman_runs)) AS boundary_percentage
+FROM deliveries
+GROUP BY batter
+HAVING SUM(batsman_runs) >= 500
+ORDER BY boundary_percentage DESC
+LIMIT 1"
+MiniMax M3,3,hard,True,match,"SELECT COUNT(*) FROM (
+    SELECT batter, SUM(batsman_runs) AS total_runs
+    FROM deliveries
+    GROUP BY batter
+    HAVING SUM(batsman_runs) >= 1000
+) AS subquery"
+MiniMax M3,4,hard,False,mismatch,"SELECT bowler, COUNT(*) AS ball_count
+FROM deliveries
+WHERE extras_type IS NULL OR extras_type NOT IN ('wide', 'noball', 'no-ball')
+GROUP BY bowler
+ORDER BY ball_count DESC
+LIMIT 1"
+MiniMax M3,5,hard,True,match,"SELECT batter, SUM(batsman_runs) AS total_runs
+FROM deliveries
+GROUP BY match_ids, batter
+ORDER BY total_runs DESC
+LIMIT 1"
+MiniMax M3,6,hard,False,sql_error,
+MiniMax M3,7,hard,True,match,SELECT SUM(total_runs) FROM deliveries WHERE over BETWEEN 0 AND 5
+MiniMax M3,8,hard,True,match,"SELECT batter, SUM(batsman_runs) AS total_runs
+FROM deliveries
+WHERE over BETWEEN 15 AND 19
+GROUP BY batter
+ORDER BY total_runs DESC
+LIMIT 1"
+MiniMax M3,9,brutal,False,mismatch,"WITH batter_stats AS (
+  SELECT 
+    batter,
+    SUM(batsman_runs) AS runs,
+    SUM(CASE WHEN extras_type != 'wides' THEN 1 ELSE 0 END) AS legal_balls
+  FROM deliveries
+  WHERE extras_type != 'wides' OR extras_type IS NULL
+  GROUP BY batter
+  HAVING SUM(batsman_runs) >= 300
+)
+SELECT 
+  batter,
+  ROUND(CAST(runs AS REAL) / legal_balls * 100, 2) AS strike_rate
+FROM batter_stats
+WHERE legal_balls > 0
+ORDER BY strike_rate DESC
+LIMIT 1"
+MiniMax M3,10,brutal,False,mismatch,"WITH legal_balls AS (
+  SELECT 
+    bowler,
+    COUNT(*) AS balls,
+    SUM(batsman_runs) AS runs_conceded
+  FROM deliveries
+  WHERE extras_type NOT IN ('wides', 'no_balls') 
+     OR extras_type IS NULL
+     OR extras_type = ''
+  GROUP BY bowler
+  HAVING COUNT(*) >= 1000
+),
+bowler_stats AS (
+  SELECT 
+    bowler,
+    runs_conceded,
+    balls,
+    CAST(balls AS REAL) / 6.0 AS overs,
+    CAST(runs_conceded AS REAL) / (CAST(balls AS REAL) / 6.0) AS economy
+  FROM legal_balls
+)
+SELECT bowler, economy
+FROM bowler_stats
+ORDER BY economy ASC
+LIMIT 1"
+MiniMax M3,11,brutal,False,sql_error,
+MiniMax M3,12,brutal,False,mismatch,"SELECT m.season, d.batting_team, SUM(d.total_runs) AS total_runs
+FROM deliveries d
+JOIN matches m ON d.match_ids = m.id
+GROUP BY m.season, d.batting_team
+HAVING total_runs = (
+    SELECT MAX(runs)
+    FROM (
+        SELECT SUM(d2.total_runs) AS runs
+        FROM deliveries d2
+        JOIN matches m2 ON d2.match_ids = m2.id
+        WHERE m2.season = m.season
+        GROUP BY d2.batting_team
+    ) AS season_runs
+)
+ORDER BY m.season"
+MiniMax M3,13,brutal,True,match,"SELECT batter, 
+       SUM(batsman_runs) * 1.0 / COUNT(DISTINCT match_ids) AS avg_runs_per_match
+FROM deliveries
+GROUP BY batter
+HAVING COUNT(DISTINCT match_ids) >= 30
+ORDER BY avg_runs_per_match DESC
+LIMIT 1"
+MiniMax M3,14,brutal,True,match,"SELECT d.batting_team, SUM(d.total_runs) AS second_innings_total
+FROM deliveries d
+JOIN matches m ON d.match_ids = m.id
+WHERE d.inning = 2 AND d.batting_team = m.winner
+GROUP BY d.match_ids, d.batting_team
+ORDER BY second_innings_total DESC
+LIMIT 1"
+MiniMax M3,15,brutal,True,match,"SELECT bowler, COUNT(*) AS wicket_count
+FROM deliveries
+WHERE over BETWEEN 15 AND 19
+  AND is_wicket = 1
+  AND dismissal_kind NOT IN ('run out', 'retired hurt', 'retired out', 'obstructing the field')
+GROUP BY bowler
+ORDER BY wicket_count DESC
+LIMIT 1"
+MiniMax M3,16,brutal,True,match,"SELECT batter, COUNT(*) AS balls_faced
+FROM deliveries
+WHERE batter NOT IN (
+    SELECT DISTINCT player_dismissed
+    FROM deliveries
+    WHERE player_dismissed IS NOT NULL
+)
+GROUP BY batter
+ORDER BY balls_faced DESC
+LIMIT 1"
+MiniMax M3,17,brutal,False,mismatch,"SELECT 
+  CAST(SUM(CASE WHEN toss_winner = winner AND toss_decision = 'field' THEN 1 ELSE 0 END) AS REAL) * 100.0 / COUNT(*) AS percentage
+FROM matches
+WHERE winner IS NOT NULL"
+MiniMax M3,18,brutal,False,sql_error,"WITH season_2023 AS (
+  SELECT * FROM matches WHERE season = '2023'
+),
+team_played AS (
+  SELECT team1 AS team FROM season_2023
+  UNION ALL
+  SELECT team2 AS team FROM season_2023
+),
+team_counts AS (
+  SELECT team, COUNT(*) AS matches_played
+  FROM team_played
+  GROUP BY team
+  HAVING COUNT(*) >= 5
+),
+team_wins AS (
+  SELECT winner AS team, COUNT(*) AS wins
+  FROM season_2023
+  WHERE winner IS NOT NULL"
+MiniMax M3,19,brutal,False,sql_error,
+MiniMax M3,20,brutal,False,sql_error,

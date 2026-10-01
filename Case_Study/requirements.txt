@@ -1,0 +1,5 @@
+sqlite3
+pandas
+langchain_openrouter
+langchain
+dotenv
