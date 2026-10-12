@@ -1,0 +1,92 @@
+[
+  {
+    "id": "g001",
+    "query": "Compare safety and operational risk categories for LLM deployment, highlighting key considerations.",
+    "ideal_answer": "Safety risk categories focus on preventing model misuse such as data leakage, jailbreaks, biased or harmful outputs, and privacy violations. Operational risk categories address deployment concerns like latency, cost efficiency, reliability, scalability, and monitoring to ensure the LLM runs fast, cheap, and consistently. Key considerations: for safety, enforce robust guardrails, testing for bias, and data protection; for operations, optimize inference speed, manage compute expenses, implement fault‑tolerance, and set up continuous performance monitoring.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g002",
+    "query": "Explain why component-only evals can miss pipeline failures despite correct retriever and generator performance.",
+    "ideal_answer": "Component‑only evaluations test each piece in isolation, so they miss errors that arise from how components interact. Even if the retriever and generator score well individually, their combined output can be mis‑ranked, mismatched, or otherwise faulty in the pipeline, leading to failures that component‑level evals won’t catch.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g003",
+    "query": "By Nov, how will builder track train LLMs to teach gen‑AI design, and who instructs?",
+    "ideal_answer": "The builder track will train LLMs to teach generative‑AI system design by having one of the two senior instructors lead the sessions. Whichever of the two finishes the prerequisite course first will take the teaching role – if LLM Wales completes it first, I will teach; if LLM Ops finishes first, Himanshu will teach.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g004",
+    "query": "How do the evaluated retriever and generator reliability compare to overall RAC application performance?",
+    "ideal_answer": "Evaluating the retriever and generator in isolation shows they work, but that alone does not guarantee the RAC application will perform well overall; the integrated system must be tested end‑to‑end because interactions and other factors can affect final performance.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g005",
+    "query": "How to evaluate software via test cases for correctness, specifically using Claude for agentic STLC?",
+    "ideal_answer": "To evaluate software for correctness in an agentic STLC using Claude, write test cases that define the expected behavior, run them against the code, and check whether each case passes. Claude can help generate, execute, and interpret these test results—if all tests pass the software is correct; any failures indicate bugs that need fixing.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g006",
+    "query": "Compare the proportion of short‑answer, MCQ, and multimodal image questions in the test.",
+    "ideal_answer": "The test is dominated by short‑answer items (about 80 % of questions). MCQs make up roughly 20 %, while multimodal image questions account for about 10 % of the total.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g007",
+    "query": "Compare the overall leaderboard's model ranking criteria with human‑preference leaderboards' voting method.",
+    "ideal_answer": "The overall leaderboard ranks models by aggregating quantitative metrics—capability across domains (coding, speech, image, audio, hardware), cost, and performance—into a single score. In contrast, human‑preference leaderboards rely on qualitative user votes: users compare two model answers to the same query and choose the one they find more helpful, clear, creative, etc., with rankings derived from these pairwise preferences.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g008",
+    "query": "Quantify # of elem. arithmetic items in GSM8K benchmark.",
+    "ideal_answer": "The GSM8K benchmark contains roughly 8,000–8,500 elementary arithmetic questions.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g009",
+    "query": "Confirm txt2SQL leaderboard existence and prioritize coverage, metrics, relevance for selection within project timeline.",
+    "ideal_answer": "Yes, text‑to‑SQL leaderboards exist (e.g., Spider, WikiSQL, and recent benchmark suites on PapersWithCode). When selecting one, prioritize: 1) coverage of query types and domains relevant to your project; 2) evaluation metrics (exact match, execution accuracy, latency) that align with your goals; 3) relevance of the benchmark’s data distribution to your target use‑case; and 4) availability of up‑to‑date results within your project timeline to enable quick model shortlisting.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g010",
+    "query": "From the context's varied percentages, deduce the exact human baseline reported for GPQMA.",
+    "ideal_answer": "The human baseline reported for GPQMA is 81.3%.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g011",
+    "query": "Compare how adding production mistakes vs excluding them affects the richness of the golden dataset.",
+    "ideal_answer": "Including production mistakes in the golden dataset enriches it by capturing real‑world failure cases, leading to a more comprehensive and robust model. Excluding those mistakes keeps the dataset cleaner but limits its coverage, potentially missing edge cases and reducing the model’s ability to learn from actual production errors.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g012",
+    "query": "How does comparing post‑update success rates across question types in a golden dataset detect regression?",
+    "ideal_answer": "By measuring the success rate for each question type in the golden dataset before and after a change, you can spot drops in performance. If a post‑update rate for a type (e.g., refunds) falls from its baseline (e.g., 90%) to a lower value (e.g., 80%), that decline signals a regression, indicating the update harmed that specific capability while other types may remain unchanged.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g013",
+    "query": "Why are subjective exams harder for LLMs than MCQs, and how does this impact calibration?",
+    "ideal_answer": "Subjective exams require LLMs to generate complete, open‑ended answers rather than selecting from predefined options, which is harder for them to produce accurately. This difficulty makes it easier for the model to recognize its uncertainty, so during calibration the system can more reliably flag \"I don’t know\" (or \"pass\") responses, improving the benchmark’s measurement of both accuracy and the model’s self‑awareness of its knowledge limits.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g014",
+    "query": "How to assess chatbot safety and correctness simultaneously at the application level?",
+    "ideal_answer": "Assess chatbot safety and correctness at the application level by placing evaluation metrics on the entire application. Create test scenarios that check the answer’s factual correctness and usefulness while also verifying that no unsafe information (e.g., personal data, harmful content) is disclosed. Use combined metrics—such as accuracy + helpfulness scores together with safety checks (PII leakage, toxicity filters)—and aggregate the results to get a single safety‑correctness score for the application.",
+    "source": "TODO-verify"
+  },
+  {
+    "id": "g015",
+    "query": "How many short fact‑seeking questions did GPT‑4 fail to answer in the 4,326‑question set?",
+    "ideal_answer": "GPT‑4 failed to answer 4,326 short fact‑seeking questions.",
+    "source": "TODO-verify"
+  }
+]
