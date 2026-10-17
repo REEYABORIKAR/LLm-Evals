@@ -50,31 +50,53 @@ class GroqJudge(DeepEvalBaseLLM):
                         }
                     ],
                     temperature=0,
+                    max_tokens=4096,
                 )
 
                 output = response.choices[0].message.content
 
-                if output is None:
-                    raise ValueError(
-                        "Groq returned an empty response."
-                    )
+                if not output or not output.strip():
+                    raise ValueError("Groq returned an empty response.")
+
+                output = output.strip()
+
+                # Remove markdown JSON fences
+                if output.startswith("```"):
+                    output = output.replace("```json", "")
+                    output = output.replace("```", "")
+                    output = output.strip()
 
                 if schema is not None:
-                    return schema.model_validate_json(output)
+                    try:
+                        return schema.model_validate_json(output)
+                    except Exception as json_error:
+                        # Invalid/truncated JSON. Retry the Groq request.
+                        print(f"\nGroq error: {type(e).__name__}: {error_text}")
+                        print(
+                                f"Attempt {attempt + 1}/{max_retries}. "
+                                f"Retrying in {wait_time}s..."
+                            )
+
+                        if attempt == max_retries - 1:
+                            print("\nLast Groq output:")
+                            print(output[:2000])
+                            raise json_error
+
+                        time.sleep(2 ** attempt)
+                        continue
 
                 return output
 
             except Exception as e:
                 error_text = str(e)
 
-                # Retry temporary Groq errors:
-                # 429 = rate limit
-                # 503 = model temporarily overloaded
                 is_retryable = (
                     "429" in error_text
                     or "503" in error_text
                     or "rate_limit" in error_text.lower()
                     or "over capacity" in error_text.lower()
+                    or "temporary" in error_text.lower()
+                    or "empty response" in error_text.lower()
                 )
 
                 if not is_retryable:
@@ -83,8 +105,6 @@ class GroqJudge(DeepEvalBaseLLM):
                 if attempt == max_retries - 1:
                     raise
 
-                # Exponential backoff:
-                # 1s, 2s, 4s, 8s
                 wait_time = 2 ** attempt
 
                 print(
